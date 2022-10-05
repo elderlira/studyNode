@@ -4,11 +4,11 @@ import validaLinks from "./validaLinks.js"
 
 const caminho = process.argv
 
-function imprimeLista (valida, listaLinks, identificador = '') {
+async function imprimeLista (valida, listaLinks, identificador = '') {
     if (valida) {
         console.log(
             'lista validada', 
-            validaLinks(listaLinks, identificador)
+            await validaLinks(listaLinks)
         )
     } else {
         console.log(
@@ -33,7 +33,6 @@ async function processarTexto(argumento) {
             arquivos.forEach(async (arquivo) => {
                 const lista = await pegaArquivo(`${caminho}/${arquivo}`)
                 imprimeLista(valida, lista, arquivo)
-                // console.log('Arquivo: ' + arquivo, lista)
             })
         }
     } catch (erro) {
